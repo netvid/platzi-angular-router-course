@@ -1,0 +1,16 @@
+<div class="d-flex-product">
+  <div class="d-flex-product--image">
+    <app-img *ngIf="product.images.length > 0" [img]="product.images[0]"></app-img>
+  </div>
+
+  <h2>{{ product.price | currency }}</h2>
+  <h4> {{ product.title }} </h4>
+  <h4> {{product.taxes ?? ''}}  </h4>
+
+  <div>
+    <button (click)="onShowDetails()">See details</button>
+    <button (click)="onAddToCart()">Add cart</button>
+  </div>
+
+</div>
+

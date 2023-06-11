@@ -1,0 +1,40 @@
+.d-flex-product{
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 100%;
+  .d-flex-product--image{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  > div{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  h2{
+    color: #000;
+    font-weight: bold;
+  }
+  h4{
+    color: #808081;
+    margin-bottom: 5px;
+  }
+
+  button{
+    background-color: #03C988;
+    border: none;
+    color: #000;
+    cursor: pointer;
+    font-weight: bold;
+    padding: .5em;
+    border-radius: 5px;
+  }
+}
+p, h2 {
+  margin: 0;
+}
