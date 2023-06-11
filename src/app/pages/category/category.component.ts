@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from 'src/app/models/product.model';
+import { switchMap } from 'rxjs';
 import { ProductsService } from 'src/app/services/products.service';
 
 @Component({
   selector: 'app-category',
-  templateUrl: './category.component.html',
+  template: `
+    <app-products (loadMoreProducts)="loadMore()" [products]="products"></app-products>
+  `,
   styleUrls: ['./category.component.scss']
 })
 export class CategoryComponent implements OnInit{
@@ -16,10 +19,19 @@ export class CategoryComponent implements OnInit{
   constructor(private productsService: ProductsService, private route: ActivatedRoute){}
 
   public ngOnInit(): void{
-    this.route.paramMap.subscribe({
+    this.route.paramMap
+    .pipe(
+      switchMap((res) => {
+        this.categoryId = res.get('id');
+        if(this.categoryId) return this.productsService.getProductsByCategory(this.categoryId, this.limit, this.offset)
+
+        // If we don't have nothing to send, send a empty list
+        return [];
+    })
+    ).subscribe({
       next: (res) => {
-        this.categoryId = res.get('id')
-        this.loadMore();
+        this.products = res;
+        this.offset += this.limit;
       }
     })
   }
