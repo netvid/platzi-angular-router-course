@@ -10,11 +10,20 @@ import { checkTime } from '../interceptors/time.interceptor';
   providedIn: 'root'
 })
 export class ProductsService {
-  private baseUrl = `${environment.API_URL}/api/products`;
+  private baseUrl = `${environment.API_URL}/api`;
 
   constructor(
     private http: HttpClient
   ) { }
+
+  getProductsByCategory(categoryId: string, limit?: number, offset?: number){
+    let params = new HttpParams();
+    if(limit !== undefined && offset !== undefined){
+      params = params.set('limit', limit);
+      params = params.set('offset',offset);
+    }
+    return this.http.get<Product[]>(`${this.baseUrl}/categories/${categoryId}/products`, {params});
+  }
 
   getAllProducts(limit?: number, offset?: number): Observable<Product[]> {
     let params = new HttpParams();
@@ -22,7 +31,7 @@ export class ProductsService {
       params = params.set('limit',limit);
       params = params.set('offset',offset);
     }
-    return this.http.get<Product[]>(this.baseUrl, {params: params, context: checkTime()}).pipe(
+    return this.http.get<Product[]>(`${this.baseUrl}/products`, {params: params, context: checkTime()}).pipe(
       retry(3),
       map(products => products.map(item => {
         return {
@@ -64,19 +73,19 @@ export class ProductsService {
   }
 
   getById(id: string): Observable<Product>{
-    return this.http.get<Product>(`${this.baseUrl}/${id}`);
+    return this.http.get<Product>(`${this.baseUrl}/products/${id}`);
   }
 
   create(dto: CreateProductDTO){
-    return this.http.post<Product>(this.baseUrl,dto);
+    return this.http.post<Product>(`${this.baseUrl}/products`,dto);
   }
 
   update(id: string, dto: UpdateProductDTO){
-    return this.http.put<Product>(`${this.baseUrl}/${id}`,dto);
+    return this.http.put<Product>(`${this.baseUrl}/products/${id}`,dto);
   }
 
   delete(id: string){
-    return this.http.delete<boolean>(`${this.baseUrl}/${id}`);
+    return this.http.delete<boolean>(`${this.baseUrl}/products/${id}`);
   }
 
 

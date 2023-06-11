@@ -26,7 +26,8 @@ const routes: Routes = [
     component: RegisterComponent
   },
   {
-    path: 'category',
+    // The params will have the :number
+    path: 'category/:id',
     component: CategoryComponent
   },
   {
