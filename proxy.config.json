@@ -1,6 +1,6 @@
 {
   "/api/*": {
-    "target": "http://young-sands-07814.herokuapp.com",
+    "target": "http://damp-spire-59848.herokuapp.com",
     "logLevel": "debug",
     "secure": true,
     "changeOrigin": true

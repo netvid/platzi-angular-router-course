@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   // To don't use the proxy It will use the real url. (The proxy gives performance problems).
-  API_URL: 'http://young-sands-07814.herokuapp.com'
+  API_URL: 'https://damp-spire-59848.herokuapp.com'
 };
 
 /*
