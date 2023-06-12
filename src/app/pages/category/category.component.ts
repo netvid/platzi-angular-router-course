@@ -24,20 +24,20 @@ export class CategoryComponent implements OnInit{
       switchMap((res) => {
         this.categoryId = res.get('id');
         if(this.categoryId) return this.productsService.getProductsByCategory(this.categoryId, this.limit, this.offset)
-
         // If we don't have nothing to send, send a empty list
         return [];
     })
     ).subscribe({
       next: (res) => {
         this.products = res;
-        this.offset += this.limit;
-      }
+      },
     })
+
   }
 
   public loadMore(){
     if(this.categoryId){
+      this.offset += this.limit
       this.productsService.getProductsByCategory(this.categoryId,this.limit,this.offset).subscribe({
         next: (res) => this.products = this.products.concat(res),
         error: () => console.error('Error')
