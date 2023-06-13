@@ -43,8 +43,13 @@
     justify-content: flex-start;
     transform: translateX(-100%);
     transition: all ease-out .5s;
+    z-index: 999;
+
     &.active {
       transform: translateX(0);
+    }
+    ul li a{
+    color: #000;
     }
   }
 }

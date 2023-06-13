@@ -7,6 +7,7 @@ import { RegisterComponent } from './pages/register/register.component';
 import { MycartComponent } from './pages/mycart/mycart.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { ProductDetailComponent } from './pages/product-detail/product-detail.component';
 
 const routes: Routes = [
   {
@@ -30,6 +31,10 @@ const routes: Routes = [
     // The params will have the :number
     path: 'category/:id',
     component: CategoryComponent
+  },
+  {
+    path: 'product/:id',
+    component: ProductDetailComponent
   },
   {
     path: 'cart',
