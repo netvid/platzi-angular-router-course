@@ -6,6 +6,7 @@ import { CategoryComponent } from './pages/category/category.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { MycartComponent } from './pages/mycart/mycart.component';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
 
 const routes: Routes = [
   {
@@ -38,6 +39,11 @@ const routes: Routes = [
     path: 'profile',
     component: ProfileComponent
   },
+  // Not found component
+  {
+    path: '**',
+    component: NotFoundComponent
+  }
 ];
 
 @NgModule({
