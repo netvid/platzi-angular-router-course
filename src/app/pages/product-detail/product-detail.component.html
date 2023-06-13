@@ -1,0 +1,14 @@
+<div class="container--grid">
+  <div class="gallery">
+    <swiper >
+      <ng-template swiperSlide *ngFor="let img of product?.images">
+        <img [src]="img" alt="">
+      </ng-template>
+    </swiper>
+  </div>
+  <div class="description">
+    <h2> {{product?.title}} </h2>
+    <h4> {{product?.price | currency}} </h4>
+    <p> {{product?.description}} </p>
+  </div>
+</div>
