@@ -26,8 +26,7 @@ const routes: Routes = [
       },
       {
         path: 'login',
-        component: LoginComponent
-
+        component: LoginComponent,
       },
       {
         path: 'register',
@@ -50,12 +49,16 @@ const routes: Routes = [
         path: 'profile',
         component: ProfileComponent,
       },
-      // Not found component
-      {
-        path: '**',
-        component: NotFoundComponent,
-      },
     ],
+  },
+  {
+    path: 'admin',
+    loadChildren: () => import('./cms/cms.module').then((res) => res.CmsModule)
+  },
+  // Not found component
+  {
+    path: '**',
+    component: NotFoundComponent,
   },
 ];
 
