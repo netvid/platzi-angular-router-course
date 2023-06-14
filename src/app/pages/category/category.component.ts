@@ -7,11 +7,12 @@ import { ProductsService } from 'src/app/services/products.service';
 @Component({
   selector: 'app-category',
   template: `
-    <app-products (loadMoreProducts)="loadMore()" [products]="products"></app-products>
+    <app-products [productId]='productId' (loadMoreProducts)="loadMore()" [products]="products"></app-products>
   `,
   styleUrls: ['./category.component.scss']
 })
 export class CategoryComponent implements OnInit{
+  productId: string | null = null;
   categoryId: string  | null = '';
   products: Product[] = [];
   limit: number = 10;
@@ -31,6 +32,10 @@ export class CategoryComponent implements OnInit{
       next: (res) => {
         this.products = res;
       },
+    });
+    // Activate the sidebar product detail for each category
+    this.route.queryParams.subscribe({
+      next: (res) => this.productId = res.product
     })
 
   }

@@ -1,4 +1,3 @@
-<button (click)="toggleProductDetail()">Abrir detalles</button>
 <button (click)="createProduct()">Create Product</button>
 <button (click)="onShowProductDetails('1234')">Hello from the other side</button>
 <div class="products--grid">
@@ -18,7 +17,7 @@
       </swiper>
       <h2> {{productChosen.title}} </h2>
       <p> {{productChosen.description}} </p>
-      <button (click)="toggleProductDetail()">Close</button>
+      <button routerLink="." (click)="toggleProductDetail()">Close</button>
       <button (click)="updateProduct()">Udpate</button>
       <button (click)="deleteProduct()">Delete</button>
     </div>

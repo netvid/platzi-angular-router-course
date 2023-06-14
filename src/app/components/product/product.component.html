@@ -10,7 +10,7 @@
   <h4> {{product.taxes ?? ''}}  </h4>
 
   <div>
-    <button (click)="onShowDetails()">See details</button>
+    <a routerLink='.' [queryParams]="{product: product.id}">See details</a>
     <button (click)="onAddToCart()">Add cart</button>
   </div>
 

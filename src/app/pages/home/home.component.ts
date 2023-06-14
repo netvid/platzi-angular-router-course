@@ -1,4 +1,5 @@
 import { Component, OnInit, Output } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Product } from 'src/app/models/product.model';
 import { ProductsService } from 'src/app/services/products.service';
 
@@ -8,7 +9,12 @@ import { ProductsService } from 'src/app/services/products.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit{
-  constructor(private productsService: ProductsService){}
+  productId: string | null = null;
+  constructor(
+    private productsService: ProductsService,
+    private route: ActivatedRoute
+
+    ){}
   public products: Product[] = [];
 
   private limit: number = 10;
@@ -16,6 +22,10 @@ export class HomeComponent implements OnInit{
 
   public ngOnInit(): void {
     this.loadMore();
+    this.route.queryParams.subscribe({
+      // Capture the product query params like ( ?product=1)
+      next: (res) => this.productId = res.product
+    })
   }
 
   public loadMore(){

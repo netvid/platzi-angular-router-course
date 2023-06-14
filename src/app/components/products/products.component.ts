@@ -14,6 +14,9 @@ export class ProductsComponent{
 
   myShoppingCart: Product[] = [];
   total = 0;
+  @Input() set productId(id: string | null){
+    if(id) this.onShowProductDetails(id);
+  }
   @Input() products: Product[] = [];
   showProductDetail = false;
   // Initialize the product object
@@ -48,6 +51,7 @@ export class ProductsComponent{
   }
 
   onShowProductDetails(id: string): void{
+    console.log(this.showProductDetail);
     this.showProductDetail = true;
     this.productsService.getById(id).subscribe({
       next:  (res) => {
