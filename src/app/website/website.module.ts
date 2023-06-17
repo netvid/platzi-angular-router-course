@@ -14,7 +14,6 @@ import { LayoutComponent } from './components/layout/layout.component';
 import { NavComponent } from './components/nav/nav.component';
 import { SharedModule } from '../shared/shared.module';
 import { CategoryModule } from './pages/category/category.module';
-
 @NgModule({
   declarations: [
     NavComponent,
