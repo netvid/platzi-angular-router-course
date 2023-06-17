@@ -22,7 +22,7 @@ export class AppComponent {
   constructor(private userService: UsersService, private fileService: FileService){}
 
   public createUser(){
-    this.userService.create({email: 'luis@gmail.com', password: 'abc', name: 'Luis'}).subscribe({
+    this.userService.create({email: 'luis@gmail.com', password: 'abc', name: 'Luis', role: 'customer'}).subscribe({
       next: (user) => console.log(user),
       error: () => console.error('Error')
     })
