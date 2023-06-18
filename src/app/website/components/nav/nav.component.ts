@@ -32,12 +32,16 @@ export class NavComponent implements OnInit {
       this.counter = products.length;
     });
 
+    this.authService.user$.subscribe({
+      next: (user) => this.profile = user
+    })
+
     this.getAllCategories();
   }
 
   public login(){
     this.authService.fetchLoginAndProfile('john@mail.com', 'changeme').subscribe({
-      next: (res) => this.profile = res
+      next: () => this.router.navigate(['/profile'])
     })
   }
 

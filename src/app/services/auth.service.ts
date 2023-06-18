@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Auth } from '../models/auth.model';
-import { Observable, switchMap, tap, zip} from 'rxjs';
+import { BehaviorSubject, Observable, switchMap, tap, zip} from 'rxjs';
 import { User } from '../models/user.model';
 import { TokenService } from './token.service';
 
@@ -11,7 +11,9 @@ import { TokenService } from './token.service';
 })
 export class AuthService {
 
-  private baseUrl = `${environment.API_URL}/api/auth`
+  private baseUrl = `${environment.API_URL}/api/auth`;
+  private user = new BehaviorSubject<User | null>(null);
+  user$ = this.user.asObservable();
 
   constructor(private http: HttpClient, private tokenService: TokenService) { }
 
@@ -23,7 +25,11 @@ export class AuthService {
   }
 
   public profile(){
-    return this.http.get<User>(`${this.baseUrl}/profile`);
+    return this.http.get<User>(`${this.baseUrl}/profile`)
+    // Send the user to the global
+    .pipe(
+      tap((user) => this.user.next(user))
+    );
   }
 
   fetchLoginAndProfile(email: string, password: string){
