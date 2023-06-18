@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivateFn, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivateFn, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { TokenService } from '../services/token.service';
 
 @Injectable({
@@ -14,6 +14,15 @@ export const canActivate: CanActivateFn = (
 ) => {
 
   const tokenService = inject(TokenService);
+  const router = inject(Router);
   const token = tokenService.getToken();
-  return token ? true : false;
+
+  // If there isn't a token redirect to /home
+  if(!token){
+    router.navigate(['/home']);
+    return false
+  }
+
+  // Otherwise
+  return true;
 }
