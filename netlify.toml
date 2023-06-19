@@ -1,5 +1,5 @@
 [build]
-  public = "dist/my-store-api"
+  publish = "dist/my-store-api"
   command = "ng build"
 [[redirects]]
   from "/*"
