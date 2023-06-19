@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { CustomStrategyService } from './services/custom-strategy.service';
+import { AdminGuard } from './guards/admin.guard';
 
 
 const routes: Routes = [
@@ -14,6 +15,7 @@ const routes: Routes = [
   },
   {
     path: 'admin',
+    canActivate: [AdminGuard],
     loadChildren: () => import('./cms/cms.module').then((res) => res.CmsModule)
   },
   // Not found component

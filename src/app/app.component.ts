@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { Product } from './models/product.model';
 import { UsersService } from './services/users.service';
@@ -13,13 +13,21 @@ import { FileService } from './services/file.service';
   `,
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   imgParent = '';
   showImg = true;
   token: string = '';
   imgRendered = '';
 
-  constructor(private userService: UsersService, private fileService: FileService){}
+  constructor(
+    private userService: UsersService,
+    private fileService: FileService,
+    private authService: AuthService){}
+
+  public ngOnInit(): void{
+    // To keep the user in other components like the nav when the page is reloaded
+    this.authService.profile().subscribe();
+  }
 
   public createUser(){
     this.userService.create({email: 'luis@gmail.com', password: 'abc', name: 'Luis', role: 'customer'}).subscribe({

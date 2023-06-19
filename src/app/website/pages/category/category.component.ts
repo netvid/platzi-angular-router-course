@@ -7,7 +7,7 @@ import { ProductsService } from 'src/app/services/products.service';
 @Component({
   selector: 'app-category',
   template: `
-    <app-products [productId]='productId' (loadMoreProducts)="loadMore()" [products]="products"></app-products>
+    <app-products [productId]='productId' (loadMoreProducts)="onLoadMore()" [products]="products"></app-products>
   `,
   styleUrls: ['./category.component.scss']
 })
@@ -40,13 +40,14 @@ export class CategoryComponent implements OnInit{
 
   }
 
-  public loadMore(){
+  public onLoadMore(){
     if(this.categoryId){
+
       this.offset += this.limit
       this.productsService.getProductsByCategory(this.categoryId,this.limit,this.offset).subscribe({
         next: (res) => this.products = this.products.concat(res),
         error: () => console.error('Error')
-      })
+      });
       this.offset += this.limit;
     }
   }

@@ -19,6 +19,9 @@ export class ProductsComponent{
     if(id) this.onShowProductDetails(id);
   }
   @Input() products: Product[] = [];
+
+  @Output() loadMoreProducts = new EventEmitter();
+
   showProductDetail = false;
   // Initialize the product object
   productChosen: Product = {
@@ -105,7 +108,6 @@ export class ProductsComponent{
     });
   }
 
-  @Output() loadMoreProducts = new EventEmitter();
   loadMore(){
     this.loadMoreProducts.emit();
   }

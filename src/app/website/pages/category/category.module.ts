@@ -11,7 +11,7 @@ import { CategoryRoutingModule } from './category-routing.module';
   imports: [
     CommonModule,
     CategoryRoutingModule,
-    SharedModule
+    SharedModule,
   ]
 })
 export class CategoryModule { }
